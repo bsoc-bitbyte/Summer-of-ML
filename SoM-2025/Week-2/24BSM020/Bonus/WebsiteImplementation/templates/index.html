@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP Rating Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="site-title">CP Rating Predictor</span>
+        <div class="top-bar-icons">
+            <a class="icon-link" href="https://github.com/dp2426" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <svg height="26" width="26" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:middle;">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+            <a class="icon-link" href="https://www.linkedin.com/in/dhairya-pandya/" target="_blank" rel="noopener noreferrer" title="LinkedIn" style="margin-left: 10px;">
+                <svg height="26" width="26" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Competitive Programming Rating Predictor</h1>
+        <form id="predict-form">
+            <label for="platform">Choose Platform You Use:</label>
+            <select id="platform" name="platform">
+                <option value="codechef">CodeChef</option>
+                <option value="codeforces">Codeforces</option>
+            </select>
+            <label for="rating">Your Rating:</label>
+            <input type="number" id="rating" name="rating" required min="0">
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result"></div>
+        <div id="band-box"></div>
+        <div id="progress-bar-container">
+            <div id="progress-bar-bg">
+                <div id="progress-bar-fill"></div>
+                <div id="progress-bar-marker"></div>
+            </div>
+            <div id="progress-bar-labels">
+                <span id="min-label"></span>
+                <span id="max-label"></span>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-title">Tech Stack</div>
+        <div class="footer-bubbles">
+            <span class="footer-bubble">Python (Flask)</span>
+            <span class="footer-bubble">HTML5 &amp; CSS3</span>
+            <span class="footer-bubble">CSV/JSON Data Processing</span>
+            <span class="footer-bubble">Machine Learning</span>
+            <span class="footer-bubble">Linear Regression</span>
+        </div>
+    </footer>
+    <script>
+    function getCodechefBand(rating) {
+        if (rating >= 2500) return { band: '7★', color: '#d32f2f', label: '7 Star' };
+        if (rating >= 2200) return { band: '6★', color: '#ff6d00', label: '6 Star' };
+        if (rating >= 2000) return { band: '5★', color: '#fbbf24', label: '5 Star' };
+        if (rating >= 1800) return { band: '4★', color: '#7c3aed', label: '4 Star' };
+        if (rating >= 1600) return { band: '3★', color: '#1976d2', label: '3 Star' };
+        if (rating >= 1400) return { band: '2★', color: '#43a047', label: '2 Star' };
+        return { band: '1★', color: '#808080', label: '1 Star' };
+    }
+    function getCodeforcesTitle(rating) {
+        if (rating >= 4000) return { title: 'eponym', color: '#000000' };
+        if (rating >= 3000) return { title: 'Legendary Grandmaster', color: '#ff0000' };
+        if (rating >= 2600) return { title: 'International Grandmaster', color: '#ff0000' };
+        if (rating >= 2400) return { title: 'Grandmaster', color: '#ff0000' };
+        if (rating >= 2300) return { title: 'International Master', color: '#ffcc00' };
+        if (rating >= 2100) return { title: 'Master', color: '#ffcc00' };
+        if (rating >= 1900) return { title: 'Candidate Master', color: '#ff8c00' };
+        if (rating >= 1600) return { title: 'Expert', color: '#0000ff' };
+        if (rating >= 1400) return { title: 'Specialist', color: '#03a89e' };
+        if (rating >= 1200) return { title: 'Pupil', color: '#60c000' };
+        return { title: 'Newbie', color: '#808080' };
+    }
+    function getPlatformRange(platform) {
+        if (platform === 'codechef') {
+            return { min: 0, max: 3500 };
+        } else {
+            return { min: 0, max: 4000 };
+        }
+    }
+    function updateProgressBar(platform, rating) {
+        const { min, max } = getPlatformRange(platform);
+        const percent = Math.max(0, Math.min(1, (rating - min) / (max - min)));
+        const fill = document.getElementById('progress-bar-fill');
+        const marker = document.getElementById('progress-bar-marker');
+        const minLabel = document.getElementById('min-label');
+        const maxLabel = document.getElementById('max-label');
+        fill.style.width = (percent * 100) + '%';
+        marker.style.left = `calc(${percent * 100}% - 8px)`;
+        minLabel.textContent = min;
+        maxLabel.textContent = max;
+        marker.style.display = 'block';
+    }
+    function hideProgressBar() {
+        document.getElementById('progress-bar-fill').style.width = '0';
+        document.getElementById('progress-bar-marker').style.display = 'none';
+        document.getElementById('min-label').textContent = '';
+        document.getElementById('max-label').textContent = '';
+    }
+    document.getElementById('predict-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const platform = document.getElementById('platform').value;
+        const rating = document.getElementById('rating').value;
+        const resultDiv = document.getElementById('result');
+        const bandBox = document.getElementById('band-box');
+        resultDiv.textContent = 'Predicting...';
+        bandBox.innerHTML = '';
+        hideProgressBar();
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ platform, rating })
+            });
+            const data = await response.json();
+            if (data.predicted_rating !== undefined) {
+                let label = '';
+                let bandHtml = '';
+                if (platform === 'codechef') {
+                    label = 'Predicted Codeforces Rating';
+                    const band = getCodeforcesTitle(data.predicted_rating);
+                    bandHtml = `<div class="band-title-box" style="background:${band.color};color:#fff;">${band.title}</div>`;
+                } else {
+                    label = 'Predicted CodeChef Rating';
+                    const band = getCodechefBand(data.predicted_rating);
+                    bandHtml = `<div class="band-title-box" style="background:${band.color};color:#fff;">${band.band} (${band.label})</div>`;
+                }
+                resultDiv.textContent = `${label}: ${data.predicted_rating}`;
+                bandBox.innerHTML = bandHtml;
+                updateProgressBar(platform, data.predicted_rating);
+            } else {
+                resultDiv.textContent = 'Error: ' + (data.error || 'Unknown error');
+            }
+        } catch (err) {
+            resultDiv.textContent = 'Error: Could not connect to server.';
+        }
+    });
+    </script>
+</body>
+</html> 

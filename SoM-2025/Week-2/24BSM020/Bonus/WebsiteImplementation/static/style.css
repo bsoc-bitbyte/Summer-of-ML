@@ -1,0 +1,229 @@
+body {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 100%);
+    color: #ffe0b2;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.top-bar {
+    width: 100%;
+    background: linear-gradient(90deg, #3a0a0a 0%, #b71c1c 80%, #ff1744 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 2rem 0.7rem 1.2rem;
+    box-shadow: 0 2px 12px rgba(255, 23, 68, 0.10);
+    font-size: 1.1rem;
+    flex-wrap: wrap;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+.site-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+.github-link {
+    color: #ffb300;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+.github-link:hover {
+    color: #ff1744;
+}
+.container {
+    max-width: 420px;
+    margin: 48px auto 0 auto;
+    background: #2d0a0a;
+    padding: 2.2rem 2.5rem 2.5rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 24px rgba(255, 23, 68, 0.10);
+    text-align: center;
+}
+h1, .site-title {
+    color: #ffb300;
+    letter-spacing: 1px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+input, select, button {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+}
+input, select {
+    background: #1a0a0a;
+    color: #ffe0b2;
+    border: 1px solid #ff1744;
+}
+button {
+    background: linear-gradient(90deg, #b71c1c, #ff1744);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+}
+button:hover {
+    background: #ffb300;
+    color: #2d0a0a;
+}
+#result {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    color: #ffb300;
+}
+.band-title-box {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(255,23,68,0.10);
+    letter-spacing: 1px;
+}
+#progress-bar-container {
+    margin: 2rem auto 0 auto;
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+}
+#progress-bar-bg {
+    position: relative;
+    background: #3a0a0a;
+    border-radius: 8px;
+    height: 18px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#progress-bar-fill {
+    background: linear-gradient(90deg, #b71c1c, #ffb300, #ff1744);
+    height: 100%;
+    width: 0;
+    border-radius: 8px 0 0 8px;
+    transition: width 0.5s cubic-bezier(.4,2,.6,1);
+}
+#progress-bar-marker {
+    position: absolute;
+    top: -6px;
+    width: 16px;
+    height: 30px;
+    background: #ffe0b2;
+    border: 2px solid #ff1744;
+    border-radius: 8px;
+    left: 0;
+    transition: left 0.5s cubic-bezier(.4,2,.6,1);
+    z-index: 2;
+    display: none;
+    box-shadow: 0 2px 8px rgba(255,23,68,0.10);
+}
+#progress-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+    color: #ffb300;
+    padding: 0 2px;
+}
+.footer {
+    margin: 48px auto 0 auto;
+    padding: 1.5rem 0 2.5rem 0;
+    background: #1a0a0a;
+    color: #ffb300;
+    text-align: center;
+    border-top: 1px solid #3a0a0a;
+}
+.footer-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: left;
+}
+.footer-list li {
+    margin: 0.2rem 0;
+    color: #ffe0b2;
+    font-size: 1rem;
+}
+.footer-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: center;
+    margin-top: 1rem;
+    max-width: 100vw;
+    overflow-x: auto;
+}
+.footer-bubble {
+    background: linear-gradient(90deg, #ffe082 60%, #ffb300 100%);
+    color: #7c4700;
+    padding: 0.45rem 1.1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(255, 179, 0, 0.10);
+    border: 1px solid #ffb300;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 0.2rem;
+}
+.top-bar-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    max-width: 100vw;
+}
+.icon-link {
+    color: #ffb300;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 0;
+}
+.icon-link svg {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+}
+.icon-link:hover {
+    color: #ff1744;
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+    }
+    .footer-bubbles {
+        gap: 0.4rem;
+    }
+    .top-bar {
+        padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    }
+    .top-bar-icons {
+        gap: 0.2rem;
+    }
+    .icon-link svg {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        min-height: 22px;
+    }
+} 
